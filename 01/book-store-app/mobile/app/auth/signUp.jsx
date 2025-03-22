@@ -1,18 +1,28 @@
-import { KeyboardAvoidingView, View, Platform, Text, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { KeyboardAvoidingView, View, Platform, Text, TextInput, TouchableOpacity, ActivityIndicator, Alert } from 'react-native'
 import React, { useState } from 'react'
 import styles from "../../assets/styles/login.styles.js"
 import { Ionicons } from '@expo/vector-icons'
 import COLORS from '../../constants/colors.js'
 import { Link } from 'expo-router'
+import { useAuthStore } from '../../store/authStore.js'
 
 export default function signUp() {
     const [username, setUserName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoadin] = useState(false);
 
-    const handleSignUp = () => { }
+    const { user, isLoading, register, token } = useAuthStore();
+    console.log("User info", user);
+    console.log("token", token);
+
+    const handleSignUp = async () => {
+        const result = await register(username, email, password);
+        if (!result.success) Alert.alert("Error", result.error);
+        setUserName("");
+        setEmail("");
+        setPassword("");
+    }
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
