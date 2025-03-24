@@ -1,19 +1,24 @@
-import { View, Text, Image, TextInput, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native'
+import { View, Text, Image, TextInput, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, Platform, Alert } from 'react-native'
 import React, { useState } from 'react'
 import styles from "../../assets/styles/login.styles.js"
 import COLORS from '../../constants/colors.js';
 import { Ionicons } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import { useAuthStore } from '../../store/authStore.js';
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [isLoading, setIsLoadin] = useState(false);
+    const { login, isLoading } = useAuthStore();
 
-    const handleLogin = () => {
-
+    const handleLogin = async () => {
+        const result = await login(email, password);
+        if (!result.success) Alert.alert("Error", result.error);
+        setEmail("");
+        setPassword("");
     }
+
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
@@ -84,7 +89,7 @@ export default function Login() {
                         {/* Button  */}
                         <TouchableOpacity style={styles.button} onPress={handleLogin} disabled={isLoading}>
                             {isLoading ?
-                                (<ActivityIndicator color="#ff" />) :
+                                (<ActivityIndicator color="#fff" />) :
                                 (<Text style={styles.buttonText}>Login</Text>)}
                         </TouchableOpacity>
                         {/* bottom text  */}
@@ -93,6 +98,13 @@ export default function Login() {
                             <Link href="/auth/signUp" asChild>
                                 <TouchableOpacity>
                                     <Text style={styles.link}>SignUp</Text>
+                                </TouchableOpacity>
+                            </Link>
+                        </View>
+                        <View style={styles.footer}>
+                            <Link href="/" asChild>
+                                <TouchableOpacity>
+                                    <Text style={styles.link}>Back to Home</Text>
                                 </TouchableOpacity>
                             </Link>
                         </View>

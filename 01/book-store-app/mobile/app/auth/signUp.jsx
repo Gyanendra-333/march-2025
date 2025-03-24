@@ -119,7 +119,14 @@ export default function signUp() {
                                 <Text style={styles.footerText}>Dont't have an account</Text>
                                 <Link href="/auth" asChild>
                                     <TouchableOpacity>
-                                        <Text style={styles.link}>SignUp</Text>
+                                        <Text style={styles.link}>Login</Text>
+                                    </TouchableOpacity>
+                                </Link>
+                            </View>
+                            <View style={styles.footer}>
+                                <Link href="/" asChild>
+                                    <TouchableOpacity>
+                                        <Text style={styles.link}>Back to Home</Text>
                                     </TouchableOpacity>
                                 </Link>
                             </View>
