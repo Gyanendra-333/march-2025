@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <QueryClientProvider client={queryClient}>
-        <Header />  
+        <Header />
         <Home />
         <Footer />
       </QueryClientProvider>
@@ -20,4 +20,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
