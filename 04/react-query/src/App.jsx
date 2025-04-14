@@ -2,6 +2,7 @@ import Footer from "./components/Footer"
 import Header from "./components/Header"
 import Home from "./components/Home"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Register from "./components/Register";
 
 
 
@@ -13,7 +14,8 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <Header />
-        <Home />
+        {/* <Home /> */}
+        <Register />
         <Footer />
       </QueryClientProvider>
     </>

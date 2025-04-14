@@ -33,7 +33,7 @@ const Footer = () => {
                     {/* Social Links */}
                     <div>
                         <h3 className="text-lg font-semibold text-white mb-3">Follow Us</h3>
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-4"> 
                             <a href="#" className="hover:text-green-400">
                                 <Facebook size={20} />
                             </a>
