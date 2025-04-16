@@ -13,13 +13,17 @@ let strTotal = ""
 for (let i = 0; i < str.length; i++) {
     strTotal += str[i]
 }
-console.log(strTotal);
+// console.log(strTotal);
 
 
 
-let revStr = "gyanendra"
-let revStrTotal = "Reverse Name : "
+let revStr = "ram"
+let revStrTotal = ""
 for (let i = revStr.length - 1; i >= 0; i--) {
     revStrTotal += revStr[i]
 }
-console.log(revStrTotal);
+if (revStr === revStrTotal) {
+    console.log("This is palindrome")
+} else {
+    console.log("This is not palindrome");
+}
