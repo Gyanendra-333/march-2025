@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { assets } from '../assets/assets'
 import { useAppContext } from '../context/AppContext';
 
 const Navbar = () => {
     const [open, setOpen] = React.useState(false);
-    const { user, setUser, setShowUserLogin, navigate } = useAppContext();
+    const { user, setUser, setShowUserLogin, navigate, searchQuery, setSearchQuery } = useAppContext();
 
     const logout = async () => {
         setUser(null);
         navigate("/")
     }
+
+    useEffect(() => {
+        if (searchQuery.length > 0) {
+            navigate("/products")
+        }
+    }, [searchQuery])
 
     return (
         <div>
@@ -27,7 +33,7 @@ const Navbar = () => {
                     <NavLink to={"/contact"}>Contact</NavLink>
 
                     <div className="hidden lg:flex items-center text-sm gap-2 border border-gray-300 px-3 rounded-full">
-                        <input className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search products" />
+                        <input onChange={(e) => setSearchQuery(e.target.value)} className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500" type="text" placeholder="Search products" />
                         <img src={assets.search_icon} alt="search" className='h-4 w-4' />
                     </div>
 
@@ -36,7 +42,7 @@ const Navbar = () => {
                         <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">3</button>
                     </div>
 
-                    {!user ? (<button className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
+                    {!user ? (<button onClick={() => setShowUserLogin(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
                         Login
                     </button>) : (
                         <div className='relative group'>
@@ -56,7 +62,7 @@ const Navbar = () => {
 
                 {/* Mobile Menu */}
                 {open && (
-                    <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
+                    <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden z-10`}>
                         <NavLink to={"/"} onClick={() => setOpen(false)}>Home</NavLink>
                         <NavLink to={"/products"} onClick={() => setOpen(false)}>All Products</NavLink>
                         {user &&

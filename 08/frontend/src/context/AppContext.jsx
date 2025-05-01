@@ -14,7 +14,8 @@ export const AppContextProvider = ({ children }) => {
     const [isSeller, setIsSeller] = useState();
     const [showUserLogin, setShowUserLogin] = useState(false);
     const [products, setProducts] = useState([]);
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState({});
+    const [searchQuery, setSearchQuery] = useState({});
 
     //fetch all products
     const fetchProducts = async () => {
@@ -59,7 +60,7 @@ export const AppContextProvider = ({ children }) => {
         fetchProducts();
     }, [])
 
-    const value = { navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartQuantity, removeFromCart, cartItems }
+    const value = { navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartQuantity, removeFromCart, cartItems, searchQuery, setSearchQuery }
     return <AppContext.Provider value={value}>
         {children}
     </AppContext.Provider>
