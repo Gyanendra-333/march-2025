@@ -31,6 +31,6 @@ const ProductCategory = () => {
                 </div>)}
         </div>
     )
-}
+} 
 
 export default ProductCategory
