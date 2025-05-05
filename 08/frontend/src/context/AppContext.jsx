@@ -7,7 +7,7 @@ export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
 
-    const currency = import.meta.VITE_CURRENCY;
+    const currency = import.meta.env.VITE_CURRENCY;
 
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -76,7 +76,7 @@ export const AppContextProvider = ({ children }) => {
         }
         return Math.floor(totalAmount * 100) / 100;
     }
-    
+
 
     useEffect(() => {
         fetchProducts();
